@@ -7,4 +7,4 @@ Usefull to perform Dynamic routing test like exporting a big number of route in 
   - username
   - password
 - Execute the script
-- commit in PanOS
+- Commit in PanOS ( the script only alter the candidate configuration )
