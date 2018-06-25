@@ -1,34 +1,13 @@
 #!/usr/bin/env python
 
-"""
-urllib: needed for the urlencode method
-re: needed to search for API key in response
-ssl: needed to suppress/ignore SSL errors
-"""
-
 import urllib
 import urllib2
 import ssl
 import re
 
-
-##############################################################
-# API REQUEST
-##############################################################
 def api_request(url, values):
-    """
-    API driver function. The middle-man between the script and firewall.
 
-    :param url:     string - URL to connect to ("https://192.168.1.1/api")
-    :param values:  dictionary - the API command to be executed
-    :return:        if successful, returns an XML response as a string
-                    if unsuccessful, returns None
-    """
-
-    # must encode the dictionary of values
     data = urllib.urlencode(values)
-
-    # ignore SSL errors
     context = ssl._create_unverified_context()
 
     try:
@@ -40,19 +19,7 @@ def api_request(url, values):
         return None
 
 
-##############################################################
-# KEYGEN
-##############################################################
 def keygen(username, password, url):
-    """
-    Fetches the API key from the firewall.
-
-    :param username:    string - "username"
-    :param password:    string - "password"
-    :param url:         string - URL to connect to ("https://192.168.1.1/api")
-    :return:            if successful, returns the API key as a string
-                        if unsuccessful, returns None
-    """
 
     values = {'type': 'keygen', 'user': username, 'password': password}
     response = api_request(url, values)
@@ -65,9 +32,6 @@ def keygen(username, password, url):
         return None
 
 
-##############################################################
-# MAIN
-##############################################################
 if __name__ == '__main__':
     ip = "192.168.55.128"
     username = "admin"
